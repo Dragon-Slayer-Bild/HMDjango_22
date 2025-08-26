@@ -1,5 +1,3 @@
-from tkinter.constants import CASCADE
-
 from django.db import models
 
 
@@ -43,10 +41,17 @@ class Product(models.Model):
         verbose_name="Изображение",
         help_text="Загрузите фото продукта",
     )
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name="категория", related_name="products")
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE,
+        verbose_name="категория",
+        related_name="products",
+    )
     price = models.IntegerField(verbose_name="цена")
     created_at = models.DateField(verbose_name="дата создания", auto_now_add=True)
-    updated_at = models.DateField(verbose_name="дата последних изменений", auto_now_add=True)
+    updated_at = models.DateField(
+        verbose_name="дата последних изменений", auto_now_add=True
+    )
 
     class Meta:
         verbose_name = "Продукт"
@@ -55,5 +60,3 @@ class Product(models.Model):
 
     def __str__(self):
         return f"{self.name}, {self.price} , {self.category}"
-
-

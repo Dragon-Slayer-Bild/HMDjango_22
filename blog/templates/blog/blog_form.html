@@ -1,0 +1,21 @@
+{% extends 'blog/base.html' %}
+{% load my_tags %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Список блогов</title>
+</head>
+
+
+{% block content %}
+    <div class="container mt-5">
+        <h1 class="mb-4">Форма Блога</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+            <a href="{% url 'blog:blog_list' %}" class="btn btn-secondary">Отмена</a>
+        </form>
+    </div>
+
+{% endblock %}

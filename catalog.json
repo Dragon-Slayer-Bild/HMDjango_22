@@ -1,0 +1,23 @@
+[
+{
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+        "name": "Телефон",
+        "description": "модели телефонов"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+        "name": "СОНИЭРЕКСОН",
+        "description": "супермодель",
+        "image": "catalog/photo/1678297071_obstanovka-club-p-krasivie-doma-valkheim-instagram-2.jpg",
+        "category": 1,
+        "price": 10,
+        "created_at": "2025-08-09",
+        "updated_at": "2025-08-09"
+    }
+}
+]

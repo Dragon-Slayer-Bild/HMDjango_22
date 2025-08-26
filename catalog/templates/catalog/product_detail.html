@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'catalog/base.html' %}
 {% load my_tags %}
 
 {% block display %}
@@ -21,7 +21,7 @@
                 <h3 class="card-title pricing-card-title">{{ product.price}} руб.</h3>
                 <p class="card-text">{{ product.description }}</p>
                 <p class="card-text">{{ product.category }}</p>
-                <a class="btn btn-primary" href="{% url 'catalog:home' %}" role="button">Назад</a>
+                <a class="btn btn-primary" href="{% url 'catalog:product_list' %}" role="button">Назад</a>
             </div>
         </div>
     </div>
