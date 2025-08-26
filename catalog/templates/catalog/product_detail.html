@@ -1,0 +1,33 @@
+{% extends 'catalog/base.html' %}
+{% load my_tags %}
+
+{% block display %}
+<h1 class="display-4">Продукт</h1>
+{% endblock %}
+
+
+{% block content %}
+<div class="row row-cols-1 row-cols-md-3 g-4">
+
+    <div class="col">
+
+        <div class="card">
+
+            <img src="{{ product.image | media_filter}}" class="card-img-top">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">{{ product.name | media_filter }}</h4>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title pricing-card-title">{{ product.price}} руб.</h3>
+                <p class="card-text">{{ product.description }}</p>
+                <p class="card-text">{{ product.category }}</p>
+                <a class="btn btn-primary" href="{% url 'catalog:product_list' %}" role="button">Назад</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+
