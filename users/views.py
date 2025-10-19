@@ -10,9 +10,9 @@ from .models import User
 
 
 class RegisterView(CreateView):
-    template_name = 'register.html'
+    template_name = "register.html"
     form_class = CustomUserRegisterForm
-    success_url = reverse_lazy('catalog: product_list')
+    success_url = reverse_lazy("catalog: product_list")
 
     def form_valid(self, form):
         user = form.save()
@@ -21,14 +21,15 @@ class RegisterView(CreateView):
         user.token = token
         user.save()
         host = self.request.get_host()
-        url = f'http://{host}/users/email-confirm/{token}/'
+        url = f"http://{host}/users/email-confirm/{token}/"
         send_mail(
-                subject = 'Подтверждение почты',
-                message = f'Приветствуем, перейдите по ссылке для подтверждения  {url}',
-                from_email = EMAIL_HOST_USER,
-                recipient_list = [user.email]
+            subject="Подтверждение почты",
+            message=f"Приветствуем, перейдите по ссылке для подтверждения  {url}",
+            from_email=EMAIL_HOST_USER,
+            recipient_list=[user.email],
         )
         return super().form_valid(form)
+
 
 def email_verification(request, token):
     user = get_object_or_404(User, token=token)
