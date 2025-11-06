@@ -8,7 +8,7 @@ from catalog.models import Product
 class ProductForm(ModelForm):
     class Meta:
         model = Product
-        fields = "__all__"
+        fields = ('name', 'description', 'image', 'category', 'price')
 
     def __init__(self, *args, **kwargs):
         super(ProductForm, self).__init__(*args, **kwargs)
@@ -36,6 +36,8 @@ class ProductForm(ModelForm):
         self.fields["price"].widget.attrs.update(
             {"class": "form-control", "placeholder": "Введите цену продукта"}
         )
+
+
 
     def clean_price(self):
 
@@ -73,3 +75,16 @@ class ProductForm(ModelForm):
                     "description",
                     f"в описании присутствует запрещенное слово {forbidden_word}",
                 )
+
+
+class ProductModeratorForm(ModelForm):
+    class Meta:
+        model = Product
+        fields = ('publish',)
+
+    def __init__(self, *args, **kwargs):
+        super(ProductModeratorForm, self).__init__(*args, **kwargs)
+
+        self.fields["publish"].widget.attrs.update(
+            {"class": "form-control"}
+        )

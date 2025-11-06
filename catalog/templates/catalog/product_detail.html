@@ -23,8 +23,10 @@
                 <p class="card-text">{{ product.category }}</p>
                 <a class="btn btn-primary" href="{% url 'catalog:product_list' %}" role="button">Назад</a>
                 {% if user.is_authenticated %}
+                {% if user == product.owner or perms.catalog.can_unpublish_product%}
                 <a class="btn btn-secondary" href="{% url 'catalog:product_update' product.pk  %}" role="button">Редактировать</a>
-                <a class="btn btn-danger" href="{% url 'catalog:product_delete' product.pk %}" role="button">Удалить</a>
+                 <a class="btn btn-danger" href="{% url 'catalog:product_delete' product.pk %}" role="button">Удалить</a>
+                {% endif %}
                 {% endif %}
             </div>
         </div>
