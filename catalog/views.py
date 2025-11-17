@@ -8,13 +8,37 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from catalog.forms import ProductForm, ProductModeratorForm
-from catalog.models import Product
+from catalog.models import Product, Category
 from django.contrib.auth.models import Group
+
+from catalog.services import get_product_list_fom_cache, ProductService
+
+
+class CatalogListViewByCategory(ListView):
+    model = Product
+    form_class = ProductForm
+    template_name = "catalog/product_list_by_category.html"
+    slug_url_kwarg = 'category_id'
+
+    def dispatch(self, request, *args, **kwargs):
+        category_id = kwargs.get(self.slug_url_kwarg)  # Теперь это будет 'category_id'
+
+        # Получаем объект Category по ID
+        self.category = get_object_or_404(Category, pk=category_id)
+
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_queryset(self):
+        # Используем self.category, установленный в dispatch
+        return Product.objects.filter(category=self.category).order_by('name')
 
 
 class CatalogListView(ListView):
     model = Product
     form_class = ProductForm
+
+    def get_queryset(self):
+        return get_product_list_fom_cache()
 
 
 # app_name/<model_name>_<action>
